@@ -1,0 +1,77 @@
+<div [formGroup]="addressForm" >
+
+  <div class="flex flex-row flex-wrap">
+
+    <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+      <mat-label>Building</mat-label>
+      <input matInput formControlName="building" required>
+      @if (f['building'].errors?.required) {
+      <mat-error>Building is required</mat-error>
+      }
+      @if (f['building'].errors?.minlength) {
+      <mat-error>Minimum 3 characters.</mat-error>
+      }
+      @if (f['building'].errors?.maxlength) {
+      <mat-error>Maximum 15 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+      <mat-label>Street</mat-label>
+      <input matInput formControlName="street" required>
+      @if (f['street'].errors?.required) {
+      <mat-error>Street is required</mat-error>
+      }
+      @if (f['street'].errors?.minlength) {
+      <mat-error>Minimum 3 characters.</mat-error>
+      }
+      @if (f['street'].errors?.maxlength) {
+      <mat-error>Maximum 15 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+      <mat-label>City/Town</mat-label>
+      <input matInput formControlName="town" required>
+      @if (f['town'].errors?.required) {
+      <mat-error>City is required</mat-error>
+      }
+      @if (f['town'].errors?.minlength) {
+      <mat-error>Minimum 3 characters.</mat-error>
+      }
+      @if (f['town'].errors?.maxlength) {
+      <mat-error>Maximum 15 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+      <mat-label>County</mat-label>
+      <input matInput formControlName="county" required>
+      @if (f['county'].errors?.required) {
+      <mat-error>County is required</mat-error>
+      }
+      @if (f['county'].errors?.minlength) {
+      <mat-error>Minimum 3 characters.</mat-error>
+      }
+      @if (f['county'].errors?.maxlength) {
+      <mat-error>Maximum 15 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+      <mat-label>Postcode</mat-label>
+      <input matInput formControlName="postcode" required>
+      @if (f['postcode'].errors?.required) {
+      <mat-error>Postcode is required</mat-error>
+      }
+      @if (f['postcode'].errors?.minlength) {
+      <mat-error>Minimum 3 characters.</mat-error>
+      }
+      @if (f['postcode'].errors?.maxlength) {
+      <mat-error>Maximum 15 characters.</mat-error>
+      }
+    </mat-form-field>
+  
+  </div>
+  
+</div>

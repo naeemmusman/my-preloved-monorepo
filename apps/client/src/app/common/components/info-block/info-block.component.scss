@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+
+// The block
+.info-block {
+  padding: 16px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  // Elements of the block
+  &__title {
+    font-size: .6rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  &__content {
+    font-size: .9rem;
+    font-weight: 400;
+    border: 1px solid #cbc7c7;
+    border-radius: 2px;
+  }
+}

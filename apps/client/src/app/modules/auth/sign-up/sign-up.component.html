@@ -1,0 +1,245 @@
+<div class="flex min-w-0 flex-auto flex-col items-center sm:justify-center md:p-8">
+    <div class="flex overflow-hidden sm:bg-card sm:rounded-2xl sm:shadow md:w-full md:max-w-6xl">
+        <div class="w-full px-4 py-8 sm:w-auto sm:p-12 md:p-16">
+            <div class="mx-auto w-full max-w-125 sm:mx-0 sm:w-125">
+                <!-- Logo -->
+                <div class="w-12">
+                    <img src="images/logo/logo.svg" alt="" />
+                </div>
+
+                <!-- Title -->
+                <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight"> Sign up updated </div>
+                <div class="mt-0.5 flex items-baseline font-medium">
+                    <div>Already have an account?</div>
+                    <a class="ml-1 text-primary-500 hover:underline"
+                        [routerLink]="['/pages/authentication/sign-in']">Sign in
+                    </a>
+                </div>
+
+                <!-- Alert -->
+                @if (showAlert) {
+                <fuse-alert class="-mb-4 mt-8" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
+                    [@shake]="alert.type === 'error'">
+                    {{ alert.message }}
+                </fuse-alert>
+                }
+
+                <!-- Sign Up form -->
+                <form class="mt-8" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <!-- Name field -->
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>First Name</mat-label>
+                                <input matInput [formControlName]="'firstName'" required>
+                                @if (submitted && f['firstName'].errors?.required) {
+                                <mat-error>First Name is required</mat-error>
+                                }
+                                @if (submitted && f['firstName'].errors?.minlength) {
+                                <mat-error>Minimum 3 characters.</mat-error>
+                                }
+                                @if (submitted && f['firstName'].errors?.maxlength) {
+                                <mat-error>Maximum 15 characters.</mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="w-full">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput [formControlName]="'middleName'" required>
+                                @if (submitted && f['middleName'].errors?.required) {
+                                <mat-error>Middle Name is required</mat-error>
+                                }
+                                @if (submitted && f['middleName'].errors?.minlength) {
+                                <mat-error>Minimum 3 characters.</mat-error>
+                                }
+                                @if (submitted && f['middleName'].errors?.maxlength) {
+                                <mat-error>Maximum 15 characters.</mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="w-full">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput [formControlName]="'lastName'" required>
+                                @if (submitted && f['lastName'].errors?.required) {
+                                <mat-error>Last Name is required</mat-error>
+                                }
+                                @if (submitted && f['lastName'].errors?.minlength) {
+                                <mat-error>Minimum 3 characters.</mat-error>
+                                }
+                                @if (submitted && f['lastName'].errors?.maxlength) {
+                                <mat-error>Maximum 15 characters.</mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="w-full">
+                                <mat-label>Display Name</mat-label>
+                                <input matInput [formControlName]="'displayName'" required>
+                                @if (submitted && f['displayName'].errors?.required) {
+                                <mat-error>Display Name is required</mat-error>
+                                }
+                                @if (submitted && f['displayName'].errors?.minlength) {
+                                <mat-error>Minimum 3 characters.</mat-error>
+                                }
+                                @if (submitted && f['displayName'].errors?.maxlength) {
+                                <mat-error>Maximum 15 characters.</mat-error>
+                                }
+                            </mat-form-field>
+
+                            <!-- <mat-form-field class="w-full">
+                        <mat-label>Full name</mat-label>
+                        <input id="name" matInput [formControlName]="'name'" />
+                        @if (signUpForm.get('name').hasError('required')) {
+                        <mat-error> Full name is required </mat-error>
+                        }
+                         </mat-form-field> -->
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input type="date" matInput [formControlName]="'dateOfBirth'" required>
+                                @if (submitted && f['dateOfBirth'].errors?.required) {
+                                <mat-error>Date Of Birth is required</mat-error>
+                                }
+                                @if (submitted && f['dateOfBirth'].errors?.['dateOfBirth']) {
+                                <mat-error>Invalid date of birth format</mat-error>
+                                }
+                            </mat-form-field>
+                            <!-- Email field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Email address</mat-label>
+                                <input id="email" matInput [formControlName]="'email'" />
+                                @if (submitted && f['email'].errors?.required) {
+                                <mat-error> Email address is required </mat-error>
+                                }
+                                @if (submitted && f['email'].errors?.['email']) {
+                                <mat-error>Please enter a valid email address </mat-error>
+                                }
+                            </mat-form-field>
+
+                            <!-- Password field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Password</mat-label>
+                                <input id="password" matInput type="password" [formControlName]="'password'"
+                                    #passwordField />
+                                <button mat-icon-button type="button" (click)="
+                                passwordField.type === 'password'
+                                    ? (passwordField.type = 'text')
+                                    : (passwordField.type = 'password')
+                            " matSuffix>
+                                    @if (passwordField.type === 'password') {
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                                    }
+                                    @if (passwordField.type === 'text') {
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                                    }
+                                </button>
+                                @if (submitted && f['password'].errors?.required){
+                                <mat-error> Password is required </mat-error>
+                                }
+                            </mat-form-field>
+
+                            <!-- Confirm Password field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Confirm Password</mat-label>
+                                <input id="confirmPassword" matInput type="password"
+                                    [formControlName]="'confirmPassword'" #confirmPasswordField />
+                                <button mat-icon-button type="button" (click)="
+                                                    confirmPasswordField.type === 'password'
+                                                        ? (confirmPasswordField.type = 'text')
+                                                        : (confirmPasswordField.type = 'password')
+                                                " matSuffix>
+                                    @if (confirmPasswordField.type === 'password') {
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                                    }
+                                    @if (confirmPasswordField.type === 'text') {
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                                    }
+                                </button>
+                                @if (submitted && f['confirmPassword'].errors?.required){
+                                <mat-error>Confirm Password is required </mat-error>
+                                }
+                            </mat-form-field>
+
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Phone</mat-label>
+                                <input matInput [formControlName]="'phone'" required>
+                                @if (submitted && f['phone'].errors?.required) {
+                                <mat-error>Phone number is required</mat-error>
+                                }
+                                @if (submitted && f['phone'].errors?.minlength) {
+                                <mat-error>Phone number is too short</mat-error>
+                                }
+                                @if (submitted && f['phone'].errors?.maxlength) {
+                                <mat-error>Phone number is too long</mat-error>
+                                }
+                            </mat-form-field>
+
+                        </div>
+
+
+                        <div formGroupName="address">
+                            <mat-form-field class="w-full">
+                                <mat-label>Building</mat-label>
+                                <input matInput [formControlName]="'building'" required>
+                                @if (submitted && address['building'].errors?.required) {
+                                <mat-error>Building is required</mat-error>
+                                }
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Street</mat-label>
+                                <input matInput [formControlName]="'street'" required>
+                                @if (submitted && address['street'].errors?.required) {
+                                <mat-error>Street is required</mat-error>
+                                }
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Town</mat-label>
+                                <input matInput [formControlName]="'town'" required>
+                                @if (submitted && address['town'].errors?.required) {
+                                <mat-error>Town is required</mat-error>
+                                }
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>County</mat-label>
+                                <input matInput [formControlName]="'county'" required>
+                                @if (submitted && address['county'].errors?.required) {
+                                <mat-error>County is required</mat-error>
+                                }
+                            </mat-form-field>
+
+                            <mat-form-field class="w-full">
+                                <mat-label>Postcode</mat-label>
+                                <input matInput [formControlName]="'postcode'" required>
+                                @if (submitted && f['address'].get('postcode')?.errors?.required) {
+                                <mat-error>Postcode is required</mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <!-- Submit button -->
+                    <button type="submit" class="fuse-mat-button-large mt-6 w-full" mat-flat-button color="primary"
+                        [disabled]="loading">
+                        @if (!registerForm.disabled) {
+                        <span> Create your free account </span>
+                        }
+                        @if (registerForm.disabled) {
+                        <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
+                        }
+                    </button>
+                    <!-- <button class="fuse-mat-button-large mt-6 w-full" mat-flat-button [color]="'primary'"
+                        [disabled]="signUpForm.disabled" (click)="signUp()">
+                        @if (!signUpForm.disabled) {
+                        <span> Create your free account </span>
+                        }
+                        @if (signUpForm.disabled) {
+                        <mat-progress-spinner [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
+                        }
+                    </button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

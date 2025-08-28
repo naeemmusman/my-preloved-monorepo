@@ -1,0 +1,98 @@
+<div class="flex min-w-0 flex-auto flex-col">
+
+    <!-- Main -->
+    <div class="mx-auto flex w-full p-6 sm:p-8">
+        <!-- Column -->
+        <div class="mr-8 flex-col items-start w-full lg:flex">
+            <fuse-card class="flex w-full flex-col mb-2 p-4">
+                <div class="  flex items-center px-2">
+                    <!-- Avatar -->
+                    <div class="rounded-full">
+                        <img class="ring-bg-card h-32 w-32 rounded-full ring-4" [src]="avatarUrl$$()" alt="User Avatar" />
+                    </div>
+                    <div class="mt-4 ml-8 flex">
+
+                        <input type="file" accept="image/*" #fileInput (change)="onFileSelected($event)" hidden />
+
+                        <!-- Browse -->
+                        <button mat-flat-button [color]="'primary'" (click)="fileInput.click()"> Browse </button>
+
+                        @if (!user$$()?.isDefaultAvatar) {
+                            <!-- Delete -->
+                            <button type="button" class="sm:mx-3" mat-stroked-button (click)="resetAvatar()"> <span> Delete </span> </button>
+                        }
+                    </div>
+                </div>
+            </fuse-card>
+            <!-- About me -->
+            <fuse-card class="flex w-full flex-col p-4">
+                <div class="flex items-center justify-between px-2">
+                    <div class="text-2xl font-semibold leading-tight"> Personal Information </div>
+                    <div class="-mr-3">
+                        <button mat-icon-button (click)="openUpdateProfileDialog()">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:pencil-square'"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <hr class="my-2 w-full border-t" />
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex flex-auto flex-col w-1/2 px-1 items-start">
+                        <app-info-block class="w-full" [title$$]="'First name'">
+                            <span>{{ user$$()?.firstName }}</span>
+                        </app-info-block>
+                    </div>
+                    <div class="flex flex-auto flex-col w-1/2 px-1  items-start">
+                        <app-info-block class="w-full" [title$$]="'Middle name'">
+                            <span>{{ user$$()?.middleName }}</span>
+                        </app-info-block>
+                    </div>
+                    <div class="flex flex-auto flex-col w-1/2 px-1  items-start">
+                        <app-info-block class="w-full" [title$$]="'Last name'">
+                            <span>{{ user$$()?.lastName }}</span>
+                        </app-info-block>
+                    </div>
+                    <div class="flex flex-auto flex-col w-1/2 px-1 items-start">
+                        <app-info-block class="w-full" [title$$]="'Display name publicly as'">
+                            <span>{{ user$$()?.displayName }}</span>
+                        </app-info-block>
+                    </div>
+                    <div class="flex flex-col w-1/2 px-1 items-start">
+                        <app-info-block class="w-full" [title$$]="'Date of birth'">
+                            <span>{{ user$$()?.dateOfBirth | date}}</span>
+                        </app-info-block>
+                    </div>
+                </div>
+            </fuse-card>
+
+
+
+            <fuse-card class="flex w-full flex-col mt-2 p-4">
+                <div class="text-2xl font-semibold leading-tight">Contact Information</div>
+
+                <hr class="my-2 w-full border-t" />
+
+                <div class="flex flex-auto flex-col w-1/2 px-1 items-start">
+                    <app-info-block class="w-full" [title$$]="'Email'">
+                        <span>{{ user$$()?.email }}</span>
+                    </app-info-block>
+                </div>
+                <div class="flex flex-auto flex-col w-1/2 px-1  items-start">
+                    <app-info-block class="w-full" [title$$]="'Phone number'">
+                        <span>{{ user$$()?.phone }}</span>
+                    </app-info-block>
+                </div>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex flex-auto flex-col w-1/2 px-1 items-start">
+                        <app-info-block class="w-full" [title$$]="'Address'">
+                            <span [appAddressFormatter]="user$$()?.address"></span>
+                        </app-info-block>
+                    </div>
+                </div>
+            </fuse-card>
+
+
+        </div>
+
+    </div>
+</div>

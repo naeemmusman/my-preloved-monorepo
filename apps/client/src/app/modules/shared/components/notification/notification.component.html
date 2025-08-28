@@ -1,0 +1,19 @@
+<div class="alert" [ngClass]="alertType">
+    <ng-container *ngIf="message; else customContent">
+        <span class="icon" *ngIf="showIcon">
+            <ng-container [ngSwitch]="notificationType.toLowerCase()">
+                <span *ngSwitchCase="'critical'">🚫</span>
+                <span *ngSwitchCase="'error'">❌</span>
+                <span *ngSwitchCase="'warning'">⚠️</span>
+                <span *ngSwitchCase="'info'">ℹ️</span>
+                <span *ngSwitchCase="'success'">✅</span>
+                <span *ngSwitchDefault>🔔</span>
+            </ng-container>
+        </span>
+        <span class="message">{{ message }}</span>
+    </ng-container>
+</div>
+
+<ng-template #customContent>
+    <ng-content></ng-content>
+</ng-template>

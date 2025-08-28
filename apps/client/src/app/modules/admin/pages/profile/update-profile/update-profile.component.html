@@ -1,0 +1,99 @@
+<div class="-m-6 flex max-h-screen flex-col">
+    <!-- Header -->
+    <div class="flex h-16 flex-0 items-center justify-between bg-primary pl-6 pr-3 text-on-primary sm:pl-8 sm:pr-5">
+        <div class="text-lg font-medium">Update Profile</div>
+        <button mat-icon-button (click)="close()" [tabIndex]="-1">
+            <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Compose form -->
+    <form 
+        class="flex flex-auto flex-col overflow-y-auto p-6 sm:p-8" 
+        [formGroup]="form" 
+        (ngSubmit)="onSubmit()"
+        (keydown)="onSubmit($event)" 
+        >
+
+        <div class="flex flex-row flex-wrap">
+            <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+                <mat-label>First Name</mat-label>
+                <input matInput [formControlName]="'firstName'" required>
+                @if (submitted && f['firstName'].errors?.required) {
+                <mat-error>First Name is required</mat-error>
+                }
+                @if (submitted && f['firstName'].errors?.minlength) {
+                <mat-error>Minimum 3 characters.</mat-error>
+                }
+                @if (submitted && f['firstName'].errors?.maxlength) {
+                <mat-error>Maximum 15 characters.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+                <mat-label>Middle Name</mat-label>
+                <input matInput [formControlName]="'middleName'" required>
+                @if (submitted && f['middleName'].errors?.required) {
+                <mat-error>Middle Name is required</mat-error>
+                }
+                @if (submitted && f['middleName'].errors?.minlength) {
+                <mat-error>Minimum 3 characters.</mat-error>
+                }
+                @if (submitted && f['middleName'].errors?.maxlength) {
+                <mat-error>Maximum 15 characters.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+                <mat-label>Last Name</mat-label>
+                <input matInput [formControlName]="'lastName'" required>
+                @if (submitted && f['lastName'].errors?.required) {
+                <mat-error>Last Name is required</mat-error>
+                }
+                @if (submitted && f['lastName'].errors?.minlength) {
+                <mat-error>Minimum 3 characters.</mat-error>
+                }
+                @if (submitted && f['lastName'].errors?.maxlength) {
+                <mat-error>Maximum 15 characters.</mat-error>
+                }
+            </mat-form-field>
+            
+            <mat-form-field class="flex flex-auto flex-col w-1/2 px-1">
+                <mat-label>Display Name</mat-label>
+                <input matInput formControlName="displayName" required>
+                @if (submitted && f['displayName'].errors?.required) {
+                <mat-error>Display Name is required</mat-error>
+                }
+                @if (submitted && f['displayName'].errors?.minlength) {
+                <mat-error>Minimum 3 characters.</mat-error>
+                }
+                @if (submitted && f['displayName'].errors?.maxlength) {
+                <mat-error>Maximum 15 characters.</mat-error>
+                }
+            </mat-form-field>
+
+        </div>
+
+        <fieldset class="mt-4">
+            <legend class="text-lg font-semibold">Address</legend>
+            <app-address-form formControlName="address" />
+        </fieldset>
+
+        
+
+        <!-- Actions -->
+        <div class="mt-4 flex flex-col justify-between sm:mt-6 sm:flex-row sm:items-center">
+            <div class="-ml-2">
+            </div>
+
+            <div class="mt-4 flex items-center sm:mt-0">
+                <!-- Cancle -->
+                <button type="button" class="sm:mx-3" mat-stroked-button (click)="close()">
+                    <span>Cancel</span>
+                </button>
+                <!-- Save -->
+                <button type="submit" class="order-first sm:order-last" mat-flat-button [color]="'primary'"> Save </button>
+            </div>
+        </div>
+    </form>
+</div>
