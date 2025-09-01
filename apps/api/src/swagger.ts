@@ -1,9 +1,10 @@
+import * as express from 'express'
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { forgetPasswordSchema, resetPasswordSchema } from './api/auth/schemas.ts/forgot-password.schema';
-import { signInResponseSchema, signInSchema } from './api/auth/schemas.ts/signin.schema';
-import { signUpResponseSchema, signupSchema } from './api/auth/schemas.ts/signup.schema';
-import { profileSchema, UserAvatarUploadResponseSchema, UserAvatarUploadSchema } from './api/auth/schemas.ts/profile.schema';
+import { forgetPasswordSchema, resetPasswordSchema } from './api/auth/schemas/forgot-password.schema';
+import { signInResponseSchema, signInSchema } from './api/auth/schemas/signin.schema';
+import { signUpResponseSchema, signupSchema } from './api/auth/schemas/signup.schema';
+import { profileSchema, UserAvatarUploadResponseSchema, UserAvatarUploadSchema } from './api/auth/schemas/profile.schema';
 
 const validationErrorSchema = {
     type: 'object',
@@ -76,12 +77,12 @@ const swaggerDefinition = {
 
 const options = {
     swaggerDefinition,
-    apis: ['./src/api/**/*.routes.ts'], // Path to the API docs
+    apis: [__dirname + '/**/*.routes.ts'], // Path to the API docs
 };
 
 const swaggerSpec = swaggerJsDoc(options);
 
-export const swaggerUiSetup = (app: any) => {
+export const swaggerUiSetup = (app: express.Application) => {
     const { API_HOST, API_PORT, API_PREFIX } = process.env;
     app.use(`${API_PREFIX}/documentation`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     console.log(`API documentation available at ${API_HOST}:${API_PORT}${API_PREFIX}/documentation`);

@@ -5,7 +5,51 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/api/src/main.ts",
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "assets": ["apps/api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        },
+        "postTargets": ["tsc-alias"],
+        "commands": [{
+          "command": "tsc-alias -p apps/api/tsconfig.app.json"
+        }]
+      },
+      "configurations": {
+        "development": {
+          "fileReplacements": [
+            {
+              "replace": "apps/api/.env",
+              "with": "apps/api/.env.development"
+            }
+          ]
+        },
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
     "serve": {
+      "continuous": true,
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "dependsOn": ["build"],

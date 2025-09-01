@@ -4,6 +4,7 @@ import { CorsMiddleware, ErrorMiddleware } from './core/middlewares';
 import { CustomMiddleware } from './core/middlewares/custom.middleware';
 import { swaggerUiSetup } from './swagger';
 import { Database } from './config';
+import path from 'path';
 
 interface IServerOptions {
     port: number;
@@ -40,6 +41,7 @@ export class Server {
         this.app.use(CorsMiddleware.enableCors);            // CORS Middleware
         this.app.use(this.apiPrefix, this.router);
         swaggerUiSetup(this.app);                           // Swagger Middleware
+        this.app.use('/assets', express.static(path.join(__dirname,'assets')));
         this.app.use(ErrorMiddleware.handleError);           // Error Handling Middleware
 
         await Database.getInstance().connect(this.dbUri as string);

@@ -3,6 +3,15 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
+    "target": "es2019",
+    "baseUrl": ".",
+    "paths": {
+      // "*": ["apps/api/src/*"],
+      "@auth/*": ["src/api/auth/*"],
+      "@config/*": ["src/config/*"],
+      "@core/*": ["src/core/*"],
+      "@domain/*": ["src/domain/*"]
+    },
     "types": ["node", "express"]
   },
   "include": ["src/**/*.ts"],

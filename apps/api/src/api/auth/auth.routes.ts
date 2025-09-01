@@ -26,12 +26,34 @@ export class AuthRoutes {
 
         const authController = new AuthController();
 
-        /**
+         /**
          * @swagger
          * /api/auth/signin:
          *  post:
+         *   tags:
+         *    - Authenication
          *   summary: User Sign in
          *   description: User Sign in
+         *   security: []
+         *   requestBody:
+         *    required: true
+         *    content:
+         *     application/json:
+         *      schema:
+         *       $ref: '#/components/schemas/UserSignInRequest'
+         *   responses:
+         *    200:
+         *     description: User signed in successfully!
+         *     content:
+         *      application/json:
+         *       schema:
+         *        $ref: '#/components/schemas/UserSignInResponse'
+         *    400:
+         *     description: Validation error !
+         *     content:
+         *      application/json:
+         *       schema:
+         *        $ref: '#/components/schemas/ValidationError'
          */
         router.post(
             '/signin',

@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
-import { authHeaderSchema } from "../../api/auth/schemas.ts/auth-header.schema";
+import { authHeaderSchema } from "../../api/auth/schemas/auth-header.schema";
 import { ErrorType, HttpCode } from "../enums";
 import { AppError } from "../errors/app.error";
 
 export class ValidateMiddleware {
     public static validate = <T>(schema: Joi.ObjectSchema<T>) => {
-        return (req: Request<{}, {}, T>, res: Response, next: NextFunction): any => {
+
+        return (req: Request<unknown, unknown, T>, res: Response, next: NextFunction): any => {
             const { error, value } = schema.validate(req.body, {
                 abortEarly: false,
                 allowUnknown: true,
@@ -37,4 +38,8 @@ export class ValidateMiddleware {
         }
         next();
     }
+}
+
+function next() {
+    throw new Error("Function not implemented.");
 }
